@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="vacrem.childdata" CodeBehind="childdata.svc.cs" %>
