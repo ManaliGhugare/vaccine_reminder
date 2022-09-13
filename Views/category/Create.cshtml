@@ -1,0 +1,50 @@
+﻿@model vacrem.Models.category
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+@using (Html.BeginForm())
+{ 
+    @Html.ValidationSummary(true)  
+    <fieldset>
+        <legend>Child</legend>
+        @Html.AntiForgeryToken()
+        @if (ViewBag.Message != null)
+        {  
+  
+            <div style="border: solid 1px green">
+                @ViewBag.Message
+            </div>  
+        }
+
+        <div class="editor-label">
+            @* @Html.LabelFor(model => model.catname)*@
+            Category Name : 
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.catname)
+            @Html.ValidationMessageFor(model => model.catname)
+        </div>
+        <div class="editor-label">
+            @* @Html.LabelFor(model => model.email)*@
+            Status : 
+        </div>
+        <div class="editor-field">
+            @Html.RadioButtonFor(m => m.status, "Active")
+            @Html.RadioButtonFor(m => m.status, "Deactive")
+        </div>
+        <div>
+            <label id="lblresult"></label>
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>  
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

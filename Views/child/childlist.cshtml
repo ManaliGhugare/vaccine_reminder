@@ -1,0 +1,57 @@
+﻿@*@model vacrem.Models.child
+@model vacrem.Models.childlist*@
+@*good article https://www.c-sharpcorner.com/UploadFile/ff2f08/multiple-models-in-single-view-in-mvc/*@
+
+@using vacrem.Models
+@model dynamic  
+@{
+    ViewBag.Title = "Children List";
+}
+
+<h2>childlist</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+
+<div>
+     @Model.child
+</div>
+<table>
+    <tr>
+        <th>
+           Child Name
+        </th>
+        <th>
+          Date of birth
+        </th>
+        <th>
+         Gender
+        </th>
+        <th>
+          Country
+        </th>
+    </tr>
+
+
+@foreach (child item in Model.childlist)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.child_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dob)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sex)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.country)
+        </td>
+    </tr>
+}
+
+</table>

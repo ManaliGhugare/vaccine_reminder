@@ -1,0 +1,92 @@
+﻿@model vacrem.Models.vaccine
+
+@{
+    ViewBag.Title = "addvaccine";
+}
+
+<h2>addvaccine</h2>
+
+
+@using (Html.BeginForm())
+{  
+    @Html.ValidationSummary(true)  
+  
+    <fieldset>
+        <legend>Child</legend> 
+
+        <div>
+                    @{
+    var temp = TempData["errormsg"];
+    if (temp != null)
+    {
+                       @Html.Label((string)temp);
+    }
+                    }
+                </div>
+        @Html.AntiForgeryToken()
+        @if (ViewBag.Message != null)
+        {  
+  
+            <div style="border: solid 1px green">
+                @ViewBag.Message
+            </div>  
+        }
+
+         <div class="editor-label">
+           @Html.Hidden("hidCity");
+              @Html.Label("Category");
+        </div>
+        <div class="editor-field">
+           @Html.DropDownListFor(m => m.catid, Model.category, "-- Select Category --")
+         @*   @Html.DropDownList("city",SelectList(string.Empty,"Value","Text"),"Select",new{style="width:250px",@class="form-control"})
+          @*  @Html.ValidationMessageFor(model => model.vaccine_name)*@
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.vaccine_name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.vaccine_name)
+          @*  @Html.ValidationMessageFor(model => model.vaccine_name)*@
+        </div>
+         <div class="editor-label">
+            @Html.LabelFor(model => model.short_vacname)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.short_vacname)
+          @*  @Html.ValidationMessageFor(model => model.vaccine_name)*@
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.status)
+        </div>
+        <div class="editor-field">
+            @Html.CheckBox("status",false)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Boys_Vaccine)
+        </div>
+        <div class="editor-field">
+             @Html.CheckBox("Boys_Vaccine",false)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Girls_Vaccine)
+        </div>
+        <div class="editor-field">
+           @Html.CheckBox("Girls_Vaccine",false)
+        </div>
+        <div>
+            <label id="lblresult"></label>
+        </div>
+        <div>
+            <input type="text" name="txttest" />
+        </div>
+
+        <p>
+            <input type="submit" value="addvaccine"  />
+        </p>
+    </fieldset>  
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

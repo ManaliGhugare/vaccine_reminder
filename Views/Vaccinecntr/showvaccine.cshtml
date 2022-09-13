@@ -1,0 +1,50 @@
+﻿@using vacrem.Models
+@model dynamic
+@{
+    ViewBag.Title = "View Vaccine";
+  //  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>showvaccine</h2>
+<table>
+    <tr>
+        <th>Category Name
+        </th>
+        <th>Vaccine Name
+        </th>
+        <th>Boys Vaccine
+        </th>
+        <th>Girls Vaccine
+        </th>
+        <th>Status
+        </th>
+    </tr>
+
+    @foreach (vaccine vr in Model.vacchklst)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => vr.catname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem =>vr.vaccine_name)
+            </td>
+            <td>
+                @if (vr.Boys_Vaccine==true)
+                {
+                    @Html.Display("Active");
+                }
+                else
+                {
+                    @Html.Display("De-active");
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => vr.Girls_Vaccine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => vr.status)
+            </td>
+        </tr>
+        }
+</table>

@@ -1,0 +1,143 @@
+﻿@model vacrem.Models.child
+
+@{
+    ViewBag.Title = "addchild1";
+  //  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>addchild1</h2>
+
+  <div class="all-mix-box-tital1"><u>Add New Child</u></div>
+    @using (Html.BeginForm())
+    {  
+        @Html.ValidationSummary(true)  
+  
+        <fieldset>
+            <legend>Child</legend>
+
+            <div>
+                @{
+        var temp = TempData["errormsg"];
+        if (temp != null)
+        {
+                    @Html.Label((string)temp);
+        }
+                }
+            </div>
+            @Html.AntiForgeryToken()
+            @if (ViewBag.Message != null)
+            {  
+  
+                <div style="border: solid 1px green">
+                    @ViewBag.Message
+                </div>  
+            }
+
+
+            <div class="editor-label">
+
+                @Html.Label("Category");
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.child_name)
+                @*   @Html.DropDownList("city",SelectList(string.Empty,"Value","Text"),"Select",new{style="width:250px",@class="form-control"})
+          @*  @Html.ValidationMessageFor(model => model.vaccine_name)*@
+            </div>
+
+            <div class="editor-field">
+                @Html.EditorFor(m => m.dob, new { htmlAttributes = new { @class = "form-control", placeholder = "Child birthdate", @readonly = "true" } })
+                @*   @Html.DropDownList("city",SelectList(string.Empty,"Value","Text"),"Select",new{style="width:250px",@class="form-control"})
+          @*  @Html.ValidationMessageFor(model => model.vaccine_name)*@
+            </div>
+            <div class="editor-label">
+                Boy
+         @Html.RadioButtonFor(m => m.sex, "Boy")
+
+                @Html.RadioButtonFor(m => m.sex, "Girl")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(m => m.email)
+                @*  @Html.ValidationMessageFor(model => model.vaccine_name)*@
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(m => m.mobile)
+            </div>
+            <div class="editor-label">
+                @Html.DropDownList("country", ViewData["country"] as SelectList, "Select Country", new { id = "ddlCountry", onchange = "SelectedIndexChanged()" })
+            </div>
+            <div class="editor-label" id="dvstate" style="display: none;">
+                <select id="ddlstate" class="form-control">
+                    <option value="select">Select State</option>
+                </select>
+
+                @*   @Html.DropDownList("state", ViewData["state"] as SelectList, "Select State", new { id = "ddlstate" })*@
+
+            </div>
+
+            <p>
+                <input type="submit" value="addvaccine" />
+            </p>
+        </fieldset>  
+    }
+
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+
+        @Scripts.Render("~/bundles/jqueryui")
+        @Styles.Render("~/Content/cssjqryUi")
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+            
+                $('input[type=datetime]').datepicker({
+                    dateFormat: "dd/mm/yy",
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "-60:+0"
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+        function SelectedIndexChanged() {
+                alert("exe");
+                var value = document.getElementById("ddlCountry").value; //get value 
+                alert(value); //get text
+
+                var counid = value;
+                $.ajax({
+                    contentType: "application/json; charset=utf-8",
+                    type: "GET",
+                    url: "/api/counstate/populatestate",
+                    data: "counid=" + counid,
+                    dataType: "json",
+                    success: function (data) {
+                        //alert("exe success");
+                        if (data.length > 0) {
+                            document.getElementById('dvstate').style.display = "block";
+                            var s = '<option value="-1">Select State</option>';
+                            //   alert(data.length);
+                            for (var i = 0; i < data.length; i++) {
+                                alert(data[i].Text);
+                                s += '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
+                            }
+                            $("#ddlstate").html(s);
+                        }
+                        else {
+                            document.getElementById('dvstate').style.display = "none";
+                        }
+                    },
+                    failure: function (response) {
+                        alert("Fail" + response.responseText);
+                    },
+                    error: function (response) {
+                        alert("Error" + response.responseText);
+                    }
+                });
+            }
+        </script>
+    }

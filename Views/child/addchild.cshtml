@@ -1,0 +1,316 @@
+﻿@model vacrem.Models.child
+
+@{
+    ViewBag.Title = "Add Child";
+        //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>addchild</h2>
+<div id="body">
+    <section class="breadcumb-area bg-img gradient-background-overlay" style="background-image: url(../img/bg-img/addchwith.png);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content"  style="text-align:left">
+                        <h3 class="breadcumb-title">Add Child</h3>
+                        <p>Here you add your child with birthdate. System generate vaccine schedule as per your country and child birthday.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @using (Html.BeginForm())
+    { 
+        @Html.ValidationSummary(true)  
+     
+        <fieldset style="background-color: white;">
+            <legend>Child</legend>
+
+            <div class="container h-100" style="margin-top: 35px;">
+                <div id="leftdiv" class="adchleft">
+                    <div class="row h-100 align-items-center">
+
+                        <div align="center">
+                            @Html.Label("lblerrbirth", "", new { id = "lblerrbirth", style = "color:red; display:none;font-size:13px" })
+                            @Html.Label("lblduperror", "", new { id = "lblduperror", style = "color:red; display:none;font-size:13px" })
+                            @Html.Label("lblchildlimitexcced", "", new { id = "lblchildlimitexcced", style = "color:red; display:none;font-size:13px" })
+                        </div>
+                        <div class="my_three_box1">
+                            <div class="my_box_1">
+                                @*  @Html.Label("lblchk", "My Lable")*@
+                                <a onclick="">
+                                    <div class="roll_over_image">
+                                        <span id="lblimgrollover">Add</span>
+                                    </div>
+                                </a>
+                                <div class="circular-imageeditprof">
+                                    <a>
+                                        <img id="proimg" src="~/Images/dp.png" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="my_box_2">
+
+                                <div class="my_Profile_horizontal_box_1">
+
+                                    <div class="field_box_left">Child Name</div>
+                                    <!----end field_box_left----->
+
+                                    <div class="field_box_right">
+
+                                        <div class="field_box_right">
+                                            @Html.TextBox("txtbaby", "", new { id = "txtbaby", cssclass = "f_box_textchild" })
+                                            @*<asp:TextBox ID="txtbaby" runat="server" CssClass="f_box_textchild"></asp:TextBox>*@
+                                        </div>
+                                        <!----end field_box_right----->
+
+
+                                    </div>
+                                    <!----end field_box_right----->
+
+
+                                </div>
+                                <!---end my_Profile_horizontal_box_1----------->
+
+
+                                <div class="my_Profile_horizontal_line_1"></div>
+                                <!----end my_Profile_horizontal_line_1----------->
+
+
+                                <div class="my_Profile_horizontal_box_1">
+
+
+                                    <div class="field_box_left">Date of Birth </div>
+                                    <!----end field_box_left----->
+
+                                    <div class="field_box_right">
+
+
+                                        <div class="b_date_main">
+
+                                            @Html.EditorFor(m => m.dob, new { htmlAttributes = new { @class = "form-control", placeholder = "Child birthdate", @readonly = "true" } })
+                                            <!---end bir_date_3----->
+
+
+                                            <div style="clear: both"></div>
+
+                                        </div>
+                                        <!---end b_date_main---->
+
+
+                                    </div>
+                                    <!----end field_box_right----->
+
+
+                                </div>
+                                <!---end my_Profile_horizontal_box_1----------->
+
+
+                                <div class="my_Profile_horizontal_line_1"></div>
+                                <!----end my_Profile_horizontal_line_1----------->
+
+                                <div class="my_Profile_horizontal_box_1">
+
+
+                                    <div class="field_box_left">Gender </div>
+                                    <!----end field_box_left----->
+
+                                    <div class="field_box_right">
+
+                                        <div class="radio_button_box">
+                                            Boy
+         @Html.RadioButtonFor(m => m.sex, "Boy")
+                                            Girl
+                                        @Html.RadioButtonFor(m => m.sex, "Girl")
+                                        </div>
+                                        <!---end radio_button_box---->
+
+                                    </div>
+                                    <!----end field_box_right----->
+
+
+
+                                </div>
+                                <!---end my_Profile_horizontal_box_1----------->
+
+
+                            </div>
+                            <!----end my_box_2------>
+
+
+
+                            <div class="my_box_3">
+                            </div>
+
+                            <div style="clear: both"></div>
+                        </div>
+
+                        <div class="my_box_prof_new_1">
+                            <div class="my_Profile_horizontal_box_2">
+
+                                <div class="field_box_left_big">Email </div>
+                                <!----end field_box_left_big----->
+
+
+                                <div class="field_box_right_big">
+
+                                    @*<asp:TextBox ID="txtemail" runat="server" CssClass="f_box_textchild"></asp:TextBox>*@
+                                    @Html.TextBox("txtemail", "", new { id = "txtemail", cssclass = "f_box_textchild" })
+                                </div>
+                                <!----end field_box_right_big----->
+
+
+                            </div>
+                            <!---end my_Profile_horizontal_box_2-------->
+
+                            <div class="my_Profile_horizontal_line_2"></div>
+                            <!----end my_Profile_horizontal_line_2---->
+
+                            <div class="my_Profile_horizontal_box_2">
+
+                                <div class="field_box_left_big">Mobile No </div>
+                                <!----end field_box_left_big----->
+
+
+                                <div class="field_box_right_big">
+                                </div>
+                                <!----end field_box_right_big----->
+
+                            </div>
+                            <!---end my_Profile_horizontal_box_2-------->
+
+                            <div class="my_Profile_horizontal_line_2"></div>
+                            <!----end my_Profile_horizontal_line_2---->
+
+
+                            <div class="my_Profile_horizontal_box_2">
+
+                                <div class="field_box_left_big">Country </div>
+                                <!----end field_box_left_big----->
+
+                                <div class="field_box_right_big">
+                                    @Html.DropDownList("ddlCountry", ViewData["ddlCountry"] as SelectList, "Select Country", new { id = "ddlCountry" })
+                                </div>
+                                <!----end field_box_right_big----->
+
+                            </div>
+                            <!----end my_Profile_horizontal_box_2-------->
+
+                            <div class="my_Profile_horizontal_line_2"></div>
+
+                            <div class="my_Profile_horizontal_box_2" id="dvstate" style="display: none;">
+
+                                <div class="field_box_left_big">State </div>
+                                <!----end field_box_left_big----->
+
+                                <div class="field_box_right_big">
+
+                                    <select id="ddlstate" class="form-control">
+                                        <option value="select">Select State</option>
+                                    </select>
+
+                                </div>
+                                <!----end field_box_right_big----->
+
+                            </div>
+                            <!----end my_Profile_horizontal_box_2-------->
+
+
+                            <div class="my_Profile_horizontal_line_2"></div>
+
+                            <div class="my_Profile_horizontal_box_2" id="dvcustm" style="display: none;">
+
+                                <div class="field_box_left_big">Custom Schedule </div>
+                                <!----end field_box_left_big----->
+
+                                <div class="field_box_right_big" style="padding-top: 10px;">
+                                    @Html.CheckBox("custsch", false)
+                                </div>
+                                <!----end field_box_right_big----->
+
+                            </div>
+                            <!----end my_Profile_horizontal_box_2-------->
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <div id="rightdiv" class="adchright">
+                </div>
+            </div>
+        </fieldset>
+        
+        
+        //Testing for partial view
+        //   @Html.Partial("Error")
+
+        // @RenderPage("~/Views/Shared/Error.cshtml")
+
+        //  @{ Html.RenderPartial("Error");}
+    }
+</div>
+
+
+
+@section CSS{
+
+    @Styles.Render("~/styles/VRstyles.css")
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0"
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $("body").on("change", "#ddlCountry", function () {
+          //  alert("exect");
+            var value = document.getElementById("ddlCountry").value; //get value 
+            alert($(this).find("option:selected").text()); //get text
+
+            var counid = value;
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                type: "GET",
+                url: "/api/counstate/populatestate",
+                data: "counid=" + counid,
+                dataType: "json",
+                success: function (data) {
+                    //alert("exe success");
+                    if (data.length > 0) {
+                        document.getElementById('dvstate').style.display = "block";
+                        var s = '<option value="-1">Select State</option>';
+                        //   alert(data.length);
+                        for (var i = 0; i < data.length; i++) {
+                            alert(data[i].Text);
+                            s += '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
+                        }
+                        $("#ddlstate").html(s);
+                    }
+                    else {
+                        document.getElementById('dvstate').style.display = "none";
+                    }
+                },
+                failure: function (response) {
+                    alert("Fail" + response.responseText);
+                },
+                error: function (response) {
+                    alert("Error" + response.responseText);
+                }
+            });
+        });
+    </script>
+}
